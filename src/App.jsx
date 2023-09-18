@@ -2,7 +2,8 @@ import { useEffect, useState } from "react"
 
 
 export default function App() {
-  const APIKey = "b61dd83a4d0c4dcf83595081a8510a81";
+  const apiKey = import.meta.env.VITE_API_KEY;
+  console.log(apiKey)
   const [lat, setLat] = useState("");
   const [lon, setLon] = useState("");
 
@@ -10,13 +11,12 @@ export default function App() {
     setLat(position.coords.latitude);
     setLon(position.coords.longitude);
   });
+  const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
 
-  console.log(lon)
-  console.log(lat)
 
-  const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${APIKey}`
-
-console.log(url)
+  const finder = "Ogu"
+  const fetcher = `http://api.openweathermap.org/geo/1.0/direct?q=${finder}&limit=5&appid=${apiKey}`;
+  console.log(fetcher);
 
   return(
     <div className="">
