@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 
 
+
 export default function App() {
   const apiKey = import.meta.env.VITE_API_KEY;
   console.log(apiKey)
@@ -11,12 +12,23 @@ export default function App() {
     setLat(position.coords.latitude);
     setLon(position.coords.longitude);
   });
-  const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
 
 
-  const finder = "Ogu"
-  const fetcher = `http://api.openweathermap.org/geo/1.0/direct?q=${finder}&limit=5&appid=${apiKey}`;
-  console.log(fetcher);
+  // Fethching the data using user's location
+  useEffect(() => {
+    fetch(`https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}`)
+    .then(res => res.json())
+    .then(data => {
+      console.log(data);
+      console.log(lat, lon)
+    })
+  }, [location])
+
+
+
+  // const finder = "Ogauga"
+  // const fetcher = `http://api.openweathermap.org/geo/1.0/direct?q=${finder}&limit=5&appid=${apiKey}`;
+  // console.log(fetcher);
 
   return(
     <div className="">
